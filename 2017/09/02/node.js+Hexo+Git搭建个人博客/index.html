@@ -13,11 +13,11 @@
 
     <title>
         
-          Hello World - highya的博客 | highya&#39;s Blog
+          node.js+Hexo+Git搭建博客 - highya的博客 | highya&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://hearingg.github.io/2017/09/04/hello-world/">
+    <link rel="canonical" href="https://hearingg.github.io/2017/09/02/node.js+Hexo+Git搭建个人博客/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -86,18 +86,18 @@
                     
 
                         
-                    
-
-                        
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
+                    
+
+                        
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -165,12 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                          <a class="tag" href="/tags/#教程" title="教程">教程</a>
+                        
                     </div>
-                    <h1>Hello World</h1>
+                    <h1>node.js+Hexo+Git搭建博客</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Highya Guo on
-                        2017-09-04
+                        2017-09-02
                     </span>
                 </div>
             </div>
@@ -189,15 +191,26 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+                <h4 id="node-js-Hexo-Git"><a href="#node-js-Hexo-Git" class="headerlink" title="node.js+Hexo+Git"></a>node.js+Hexo+Git</h4><p>其实很早之前我就已经搭建了git博客，但是谁叫我是懒癌晚期呢，无赖一直没写东西，哈哈哈～ 以前都是用的云笔记一类的，但是觉得归档特别麻烦，最近突然想开始整理一些知识点，当即决定还是要有自己的一个博客网站，于是就这样开始了～～<br><br>本来买好了域名，准备用node.js+Express+Mongodb搭建一个个人网站，但是关于数据库，服务端这一块的东西自己并不是很擅长，再加上最近时间有限，暂时还是用之前用过的方案node.js+Hexo+Git。下面是我简单记录一下搭建流程：</p>
+<h1 id="node-js-Hexo-Git搭建个人博客"><a href="#node-js-Hexo-Git搭建个人博客" class="headerlink" title="node.js+Hexo+Git搭建个人博客"></a>node.js+Hexo+Git搭建个人博客</h1><hr>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h3><ul>
+<li><a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a></li>
+<li><a href="http://git-scm.com/" target="_blank" rel="external">Git</a></li>
+</ul>
+<h3 id="2、注册账号（github）"><a href="#2、注册账号（github）" class="headerlink" title="2、注册账号（github）"></a>2、注册账号（github）</h3><p><a href="https://github.com/" target="_blank" rel="external">GitHub官网</a>注册一个账号，然后创建一个新的仓库（repository），仓库的名字一定要类似于：userName.github.io，userName一定要和你创建的Git账户名字相一致，所以取名字要慎重哦，自己喜欢就好啦～</p>
+<h2 id="Hexo的安装与配置"><a href="#Hexo的安装与配置" class="headerlink" title="Hexo的安装与配置"></a>Hexo的安装与配置</h2><h3 id="1、npm安装Hexo"><a href="#1、npm安装Hexo" class="headerlink" title="1、npm安装Hexo"></a>1、npm安装Hexo</h3><pre><code>$ npm install -g hexo-cli
+</code></pre><h3 id="2、初始化"><a href="#2、初始化" class="headerlink" title="2、初始化"></a>2、初始化</h3><pre><code>$ hexo init &lt;folder&gt;     -&gt; 例：$ hexo init userName.github.io
+$ cd &lt;folder&gt;
+$ npm install    
+</code></pre><h3 id="3、配置"><a href="#3、配置" class="headerlink" title="3、配置"></a>3、配置</h3><p>找到根目录下_config.yml文件进行配置，一般我们需要修改的有：title、author、language(汉语：zh-Hans)、theme(要使用的主题名字)、deploy(部署)下的类型（type:本例写git)和仓库（repo:<a href="https://github.com/userName.github.io.git）" target="_blank" rel="external">https://github.com/userName.github.io.git）</a></p>
+<h3 id="4、启动服务"><a href="#4、启动服务" class="headerlink" title="4、启动服务"></a>4、启动服务</h3><pre><code>$ hexo server
+</code></pre><p>在终端输入上面的命令，正常的情况下会出现：INFO  Hexo is running at <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a>. Press Ctrl+C to stop.，这表明配置已经正确，hexo开始运行了，接下来我们只需在浏览器中输入<a href="http://localhost:4000/，不出意外就可以看到Hello" target="_blank" rel="external">http://localhost:4000/，不出意外就可以看到Hello</a> world的页面了。</p>
+<h3 id="5、更换主题"><a href="#5、更换主题" class="headerlink" title="5、更换主题"></a>5、更换主题</h3><p>更换主题很简单， 可以直接去<a href="https://hexo.io/" target="_blank" rel="external">Hexo官网</a>去选一个自己喜欢的主题下载， 然后把它放在根目录的themes文件夹下，最后一步就是更改配置文件_config.yml中theme(主题名字)。</p>
+<h2 id="调试并上传"><a href="#调试并上传" class="headerlink" title="调试并上传"></a>调试并上传</h2><h3 id="1、本地调试"><a href="#1、本地调试" class="headerlink" title="1、本地调试"></a>1、本地调试</h3><pre><code>$ hexo clean &amp;&amp; hexo s   -&gt; 注:clean是清除缓存
+</code></pre><p>其实在上一步我们已经看到本地调试的效果啦～ 对！就是Hello world， 哈哈哈哈～～</p>
+<h3 id="2、上传到github仓库"><a href="#2、上传到github仓库" class="headerlink" title="2、上传到github仓库"></a>2、上传到github仓库</h3><pre><code>$ npm install hexo-deployer-git --save
+$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d
+</code></pre><p>本地调试好之后，接下来就是见证奇迹的时候了，我们想访问自己的userName.github.io的时候也能看到这样的效果。那么只需要把本地的文件上传至gitHub服务器即可。这里我们先通过：$ npm install hexo-deployer-git –save安装自动部署发布工具，然后输入$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d，等待系统上传完成即可。注：hexo g表示generate，生成静态文件；hexo d表示deploy，部署文件。</p>
 
 
                 <hr>
@@ -206,10 +219,10 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2017/09/04/node.js+Hexo+Git搭建个人博客/" data-toggle="tooltip" data-placement="top" title="node.js+Hexo+Git搭建博客">&larr; Previous Post</a>
-                        </li>
                     
+                        <li class="next">
+                            <a href="/2017/09/01/hello-world/" data-toggle="tooltip" data-placement="top" title="Hello World">Next Post &rarr;</a>
+                        </li>
                     
                 </ul>
 
@@ -235,6 +248,8 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
+                          <a class="tag" href="/tags/#教程" title="教程">教程</a>
+                        
                     </div>
                 </section>
                 
