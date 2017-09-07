@@ -13,11 +13,11 @@
 
     <title>
         
-          highya的博客 | highya&#39;s Blog
+          dialog超出一屏处理 - highya的博客 | highya&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://hearingg.github.io/">
+    <link rel="canonical" href="https://hearingg.github.io/2017/09/07/dialog 超出一屏处理/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,197 +147,181 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://hearingg.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>Highya</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">What you are, what is your world.</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#前端杂记" title="前端杂记">前端杂记</a>
+                        
+                    </div>
+                    <h1>dialog超出一屏处理</h1>
+                    <h2 class="subheading">dialog</h2>
+                    <span class="meta">
+                        Posted by Highya Guo on
+                        2017-09-07
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-<!-- USE SIDEBAR -->
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <!-- Main Content -->
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
+                <p>以前一般处理dialog超出一屏的方法就是给dialog设置max-height,然后overflow-y: auto;<br>可是浏览器原生的滚动条真是丑到不行，然而也不想自己写滚动条，更不想用什么滚动条插件啦～懒人就是这样，随时都在想有什么更简单的方式～</p>
+<h1 id="dialog超出一屏处理"><a href="#dialog超出一屏处理" class="headerlink" title="dialog超出一屏处理"></a>dialog超出一屏处理</h1><p>我想要的效果：</p>
+<pre><code>1、dialog不满一屏的时候上下左右居中于窗口可视区域
+2、dialog超出一屏，dialog距离窗口顶部固定的距离，然后滑动页面的时候，dialog随之滚动，
+但是当dialog底部距离窗口底部一定的距离的时候，dialog将不会再向上滚动。
+</code></pre><p>实话说，最开始我是将fixed定位改成了absolute，这样dilaog上就不会出现滚动条了（也就是dialog随着页面的滚动而动）。当时就写了demo，以为这样就圆满了，然而…</p>
+<p>后来公司一个项目中的dialog有这样的需求时， 我得意的将之前的demo利用过来，这时候就发现问题: 如果页面内容很长，页面滚动的时候，后面就只剩下半透明的mask层了，dialog完全滚出了可视窗口，这样的体验对于有强迫症的人来说是无法忍受的（虽然当时产品拍板说这样ok，没问题～）于是我继续花了两个小时研究了一下，调试到自己满意上线（为我的认真负责鼓鼓掌呗😄）。</p>
+<p>处理方式也很简单:</p>
+<p>1、将整个dialog 用fixed定位，占满整个可视窗口 并且设置overflow: hidden;overflow-y: auto;另外有一个重点就是：<font color="#FF4B59">box-sizing: content-box; padding-right: 15px;</font>（这个目的就是为了让dialog的实际宽度为可视窗口的宽度+15px）,再结合前面overflow属性，想你应该也明白了，这样滚动条就被挤在了可视窗口外面，我们就🙈了</p>
+<p>2、dialog里层inner层，用absolute定位，并且加上伪类来填充距离可视窗口顶部和底部的固定距离，另外重点: <font color="#FF4B59">max-height: 100%;box-sizing:border-box; </font>（这个的目的就是让其在可视区域实现上下左右居中）。</p>
+<p>我好像废话有点多，好了不说了～～ 我直接将代码代码贴上，需要的直接复制测试一下就更明白了～</p>
+<h3 id="css"><a href="#css" class="headerlink" title="css:"></a>css:</h3><pre><code>* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -o-box-sizing: border-box;
+}
 
-<div class="post-preview">
+body,html {
+    color: #333;
+    font-size: 14px;
+    line-height: 150%;
+}
 
-    <a href="/2017/09/07/dialog 超出一屏处理/">
-        <h2 class="post-title">
-            dialog超出一屏处理
-        </h2>
-        <h3 class="post-subtitle">
-            dialog
-        </h3>
-        <div class="post-content-preview">
-            以前一般处理dialog超出一屏的方法就是给dialog设置max-height,然后overflow-y: auto;可是浏览器原生的滚动条真是丑到不行，然而也不想自己写滚动条，更不想用什么滚动条插件啦～懒人就是这样，随时都在想有什么更简单的方式～
-dialog超出一屏处理我想要的效果：
-1、dialog不满一屏的时候上下左右居中于窗口可视区域
-2、dialog超出一屏，dialog距离窗......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Highya Guo on
-        2017-09-07
-    </p>
+.dialog {
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding-right: 15px;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+    background-color: rgba(0,0,0,.85);
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
 
-</div>
-<hr>
+.dialog .inner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 90%;
+    max-height: 100%;
+    margin-left: -7px;
+    border-radius: 20px;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
 
-<div class="post-preview">
+.dialog .inner:before,.dialog .inner:after {
+    content: &quot;&quot;;
+    display: block;
+    width: 100%;
+    height: 20px;
+}
 
-    <a href="/2017/09/02/node.js+Hexo+Git搭建个人博客/">
-        <h2 class="post-title">
-            node.js+Hexo+Git个人博客
-        </h2>
-        <h3 class="post-subtitle">
-            node.js+Hexo+Git
-        </h3>
-        <div class="post-content-preview">
-            其实很早之前我就已经搭建了git博客，但是谁叫我是懒癌晚期呢，无赖一直没写东西，哈哈哈～ 以前都是用的云笔记一类的，但是觉得归档特别麻烦，最近突然想开始整理一些知识点，当即决定还是要有自己的一个博客网站，于是就这样开始了～～本来买好了域名，准备用node.js+Express+Mongodb搭建一个个人网站，但是关于数据库，服务端这一块的东西自己并不是很擅长，再加上最近时间有限，暂时还是用之......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Highya Guo on
-        2017-09-02
-    </p>
+.dialog .inner .title {
+    position: relative;
+    padding: 15px 0;
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    background: #f74c4c;
+    color: #fff;
+    text-align: center;
+    font-size: 17px;
+}
 
-</div>
-<hr>
+.dialog .inner .content {
+    border-radius: 0 0 10px 10px;
+    padding: 20px 5% 30px;
+    width: 100%;
+    background: #fff;
+}
+</code></pre><h3 id="html"><a href="#html" class="headerlink" title="html:"></a>html:</h3><pre><code>&lt;div class=&quot;dialog&quot;&gt;
+    &lt;div class=&quot;inner&quot;&gt;
+        &lt;div class=&quot;title&quot;&gt;Dialog Title&lt;/div&gt;
+        &lt;div class=&quot;content&quot;&gt;
+            &lt;h2&gt;title title&lt;/h2&gt;
+            &lt;div class=&quot;item-detail&quot;&gt;
+                ...
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
 
-<div class="post-preview">
+                <hr>
 
-    <a href="/2017/09/01/hello-world/">
-        <h2 class="post-title">
-            Hello World
-        </h2>
-        <h3 class="post-subtitle">
-            Welcome to Hexo
-        </h3>
-        <div class="post-content-preview">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Qu......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Highya Guo on
-        2017-09-01
-    </p>
+                
 
-</div>
-<hr>
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/09/02/node.js+Hexo+Git搭建个人博客/" data-toggle="tooltip" data-placement="top" title="node.js+Hexo+Git个人博客">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
 
+                
 
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-    
-</ul>
-
-
-
-                <!-- 如果开启评论功能 -->
                 
 
             </div>
+    <!-- Side Catalog Container -->
+        
+
     <!-- Sidebar Container -->
+
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
                 <section>
                     <!-- no hr -->
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
-                        
-                            
-                        
-                            
-                            <a href="/tags/#教程" title="教程" rel="2">教程</a>
-                            
+                       
+                          <a class="tag" href="/tags/#前端杂记" title="前端杂记">前端杂记</a>
                         
                     </div>
                 </section>
                 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
-                    <div class="short-about">
-
-                        
-                            <img src="/img/avatar.png" />
-                        
-
-                        
-                            <p>安放一个有趣的灵魂!</p>
-                        
-
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            
-                            
-
-                            
-                                <li>
-                                    <a target="_blank" href="http://weibo.com/high-ya">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-                            
-
-                            
-                                <li>
-                                    <a target="_blank"  href="https://github.com/highya">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-                            
-                            
-                        </ul>
-                    </div>
-                </section>
-                
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -352,9 +336,17 @@ Qu......
                 </ul>
                 
             </div>
-        
+
+        </div>
     </div>
-</div>
+</article>
+
+
+
+
+
+
+
 
 
     <!-- Footer -->
