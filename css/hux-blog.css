@@ -9,6 +9,9 @@
     padding-right: 5%;
   }
 }
+.post-in-body,.post-in-sidebar{
+  padding-right: 0;
+}
 .sidebar-container {
   color: #bfbfbf;
   font-size: 14px;
@@ -259,6 +262,19 @@ pre code {
   }
   #huxblog_navbar.in li {
     opacity: 1;
+  }
+  .intro-header .post-in-head .post-heading, .post-in-body,.post-in-sidebar{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .post-in-body h1{
+      font-size: 24px;
+  }
+  .post-in-body h4{
+    font-size: 18px;
+  }
+  .post-in-body h5{
+    font-size: 15px;
   }
 }
 .navbar-custom {
